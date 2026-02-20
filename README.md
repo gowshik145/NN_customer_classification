@@ -35,38 +35,87 @@ Write your own steps
 class PeopleClassifier(nn.Module):
     def __init__(self, input_size):
         super(PeopleClassifier, self).__init__()
-        #Include your code here
-
-
-
+        self.fc1 = nn.Linear(input_size, 32)
+        self.fc2 = nn.Linear(32, 16)
+        self.fc3 = nn.Linear(16, 8)
+        self.fc4 = nn.Linear(8, 4)
     def forward(self, x):
-        #Include your code here
-        
+        x=F.relu(self.fc1(x))
+        x=F.relu(self.fc2(x))
+        x=F.relu(self.fc3(x))
+        x=self.fc4(x)
+        return x 
 
 ```
 ```python
-# Initialize the Model, Loss Function, and Optimizer
 
+model =PeopleClassifier(input_size=X_train.shape[1])
+criterion =nn.CrossEntropyLoss()
+optimizer =optim.Adam(model.parameters(),lr=0.001)
+
+def train_model(model,train_loader,criterion,optimizer,epochs):
+  for epoch in range(epochs):
+    model.train()
+    for X_batch,y_batch in train_loader:
+      optimizer.zero_grad()
+      outputs=model(X_batch)
+      loss=criterion(outputs,y_batch)
+      loss.backward()
+      optimizer.step()
+
+  if(epoch+1)%10==0:
+    print(f'Epoch [{epoch+1}/{epochs}],Loss:{loss.item():.4f}')
 
 ```
+
 ```python
 def train_model(model, train_loader, criterion, optimizer, epochs):
-    #Include your code here
+   train_model(model,train_loader,criterion,optimizer,epochs=100)
+model.eval()
+predictions, actuals = [], []
+with torch.no_grad():
+    for X_batch, y_batch in test_loader:
+        outputs = model(X_batch)
+        _, predicted = torch.max(outputs, 1)
+        predictions.extend(predicted.numpy())
+        actuals.extend(y_batch.numpy())
+
+accuracy = accuracy_score(actuals, predictions)
+conf_matrix = confusion_matrix(actuals, predictions)
+class_report = classification_report(actuals, predictions, target_names=[str(i) for i in label_encoder.classes_])
+print("Name: GOWSHIK S")
+print("Register No: 212223220026\n")
+print(f'Test Accuracy: {accuracy:.2f}%')
+print("Confusion Matrix:\n", conf_matrix)
+print("Classification Report:\n", class_report)
+
+print("Name: GOWSHIK S")
+print("Register No: 212223220026\n")
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.heatmap(conf_matrix, annot=True, cmap='Blues', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_,fmt='g')
+plt.xlabel("Predicted Labels")
+plt.ylabel("True Labels")
+plt.title("Confusion Matrix")
+plt.show()
+
 ```
 
 
 
 ## Dataset Information
 
-Include screenshot of the dataset
+<img width="1310" height="287" alt="image" src="https://github.com/user-attachments/assets/bc81a467-c230-4d95-8e30-cdb8aee0570a" />
+
 
 ## OUTPUT
 
+<img width="1089" height="657" alt="image" src="https://github.com/user-attachments/assets/83910ab1-c969-4880-9baf-0d42ef2bbbd7" />
 
 
 ### Confusion Matrix
 
-Include confusion matrix here
+<img width="1300" height="473" alt="image" src="https://github.com/user-attachments/assets/c14d67d1-e6ca-493f-a1f5-ffe97ea4de58" />
 
 ### Classification Report
 
@@ -75,7 +124,7 @@ Include Classification Report here
 
 ### New Sample Data Prediction
 
-Include your sample input and output here
+<img width="800" height="125" alt="image" src="https://github.com/user-attachments/assets/2433a273-e6dc-45f7-b723-316a7a18aa32" />
 
 ## RESULT
 Include your result here
