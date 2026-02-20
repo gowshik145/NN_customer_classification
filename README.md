@@ -18,18 +18,11 @@ Include the neural network model diagram.
 
 ## DESIGN STEPS
 
-### STEP 1:
-Write your own steps
-
-### STEP 2:
-
-### STEP 3:
-
 
 ## PROGRAM
 
-### Name: 
-### Register Number:
+### Name: GOWSHIK S
+### Register Number: 212223220026
 
 ```python
 class PeopleClassifier(nn.Module):
@@ -101,8 +94,6 @@ plt.show()
 
 ```
 
-
-
 ## Dataset Information
 
 <img width="1310" height="287" alt="image" src="https://github.com/user-attachments/assets/bc81a467-c230-4d95-8e30-cdb8aee0570a" />
@@ -113,13 +104,9 @@ plt.show()
 <img width="1089" height="657" alt="image" src="https://github.com/user-attachments/assets/83910ab1-c969-4880-9baf-0d42ef2bbbd7" />
 
 
-### Confusion Matrix
+### Confusion Matrix & Classification Report
 
 <img width="1300" height="473" alt="image" src="https://github.com/user-attachments/assets/c14d67d1-e6ca-493f-a1f5-ffe97ea4de58" />
-
-### Classification Report
-
-Include Classification Report here
 
 
 ### New Sample Data Prediction
@@ -127,4 +114,4 @@ Include Classification Report here
 <img width="800" height="125" alt="image" src="https://github.com/user-attachments/assets/2433a273-e6dc-45f7-b723-316a7a18aa32" />
 
 ## RESULT
-Include your result here
+The model was evaluated using Test Accuracy, Confusion Matrix, and Classification Report, and it was able to predict the customer segmentation (A, B, C, D) effectively.
